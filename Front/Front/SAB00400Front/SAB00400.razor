@@ -1,0 +1,117 @@
+﻿@page "/SAB00400"
+@inherits R_Page
+
+<R_StackLayout>
+    <h2>Region</h2>
+</R_StackLayout>
+
+<R_StackLayout Class="mb-4">
+    <R_Grid @ref="@_gridRegiondRef"
+            DataSource="@RegionViewModel.RegionList"
+            Pageable="true"
+            R_ConductorGridSource="@_conGridRegionRef"
+            R_GridType="@R_eGridType.Original"
+            AllowAddNewRow="true"
+            AllowEditRow="true"
+            AllowDeleteRow="true"
+            R_ServiceGetListRecord="@GridRegion_ServiceGetListRecord">
+
+        <R_GridColumns>
+            <R_GridTextColumn FieldName="RegionID" HeaderText="Region Id" R_EnableAdd></R_GridTextColumn>
+            <R_GridTextColumn FieldName="RegionDescription" HeaderText="Description" R_EnableAdd R_EnableEdit></R_GridTextColumn>
+        </R_GridColumns>
+    </R_Grid>
+</R_StackLayout>
+
+<R_StackLayout>
+    <h2>Territory</h2>
+</R_StackLayout>
+
+<R_StackLayout Class="mb-3">
+    <R_Grid @ref="@_gridTerritoryRef"
+            DataSource="@TerritoryViewModel.TerritoriesList"
+            Pageable="true"
+            R_ConductorSource="@_conductorTerritoryRef"
+            R_GridType="@R_eGridType.Navigator"
+            R_ServiceGetListRecord="@GridTerritory_ServiceGetListRecord">
+        <R_GridColumns>
+            <R_GridNumericColumn FieldName="TerritoryID" HeaderText="Territory ID"></R_GridNumericColumn>
+            <R_GridTextColumn FieldName="TerritoryDescription" HeaderText="Description"></R_GridTextColumn>
+
+        </R_GridColumns>
+    </R_Grid>
+</R_StackLayout>
+
+<R_StackLayout>
+    <h3>Territory Detail</h3>
+</R_StackLayout>
+
+<R_StackLayout>
+    <R_StackLayout Row>
+        <R_ItemLayout xs="2">
+            <R_Label>Territory ID</R_Label>
+        </R_ItemLayout>
+
+        <R_ItemLayout xs="4">
+            <R_TextBox @bind-Value="@TerritoryViewModel.Data.TerritoryID"
+                              R_ConductorSource="@_conductorTerritoryRef"
+                       R_EnableAdd></R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout xs="2">
+            <R_Label>Territory Description</R_Label>
+        </R_ItemLayout>
+
+        <R_ItemLayout xs="4">
+            <R_TextBox @bind-Value="@TerritoryViewModel.Data.TerritoryDescription"
+                       R_ConductorSource="@_conductorTerritoryRef"
+                       R_EnableAdd="true"
+                       R_EnableEdit="true"></R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+
+
+
+    <R_StackLayout Row Spacing="3">
+        <R_ItemLayout xs="1">
+            <R_AddButton R_Conductor="@_conductorTerritoryRef"></R_AddButton>
+        </R_ItemLayout>
+
+        <R_ItemLayout xs="1">
+            <R_EditButton R_Conductor="@_conductorTerritoryRef"></R_EditButton>
+        </R_ItemLayout>
+
+        <R_ItemLayout xs="1">
+            <R_DeleteButton R_Conductor="@_conductorTerritoryRef"></R_DeleteButton>
+        </R_ItemLayout>
+
+        <R_ItemLayout xs="1">
+            <R_SaveButton R_Conductor="@_conductorTerritoryRef"></R_SaveButton>
+        </R_ItemLayout>
+
+        <R_ItemLayout xs="1">
+            <R_CancelButton R_Conductor="@_conductorTerritoryRef"></R_CancelButton>
+        </R_ItemLayout>
+    </R_StackLayout>
+</R_StackLayout>
+            
+<R_ConductorGrid @ref="@_conGridRegionRef"
+                 R_ViewModel="@RegionViewModel"
+                 R_IsHeader
+                 R_Display="@Grid_Display"
+                 R_ServiceGetRecord="@Grid_ServiceGetRecord"
+                 R_ServiceSave="@Grid_ServiceSave"
+                 R_ServiceDelete="@Grid_ServiceDelete">
+</R_ConductorGrid>
+
+<R_Conductor @ref="@_conductorTerritoryRef"
+             R_ViewModel="@TerritoryViewModel"
+             R_ConductorParent="@_conGridRegionRef"
+             R_DisableCancelConfirmation="false"
+             R_ServiceGetRecord="@ConductorTerritory_ServiceGetRecord"
+             R_ServiceSave="@Grid_ServiceSaveTerritory"
+             R_ServiceDelete="@Grid_ServiceDeleteTerritory">
+</R_Conductor>

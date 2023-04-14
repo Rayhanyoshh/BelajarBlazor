@@ -1,0 +1,127 @@
+﻿@page "/SAB00100"
+@inherits R_Page
+@inject R_ILocalizer<SAB00100FrontResources.Resources_Dummy_Class> _ILocalizer
+
+<R_StackLayout Spacing="3" Class="mb-4">
+    <R_StackLayout>
+        <R_Grid @ref="@_gridRef"
+                DataSource="@_viewModel.EmployeeList"
+                R_ServiceGetListRecord="@R_ServiceGetListRecordAsync"
+                R_ConductorSource="@conductorRef"
+                R_GridType="@R_eGridType.Navigator"
+                Pageable="true">
+            <R_GridColumns>
+                <R_GridTextColumn FieldName="EmployeeID" HeaderText="EmployeeID"></R_GridTextColumn>
+                <R_GridTextColumn FieldName="FirstName" HeaderText="FirstName"></R_GridTextColumn>
+                <R_GridTextColumn FieldName="LastName" HeaderText="LastName"></R_GridTextColumn>
+            </R_GridColumns>
+        </R_Grid>
+    </R_StackLayout>
+</R_StackLayout>
+
+<R_StackLayout>
+    <R_StackLayout Row="true" Spacing="3">
+        <h2>Category Detail</h2>
+
+    </R_StackLayout>
+    <R_StackLayout Row>
+        <R_ItemLayout xs="4">
+            <R_NumericTextBox @bind-Value="@_viewModel.Data.EmployeeID"
+                              Enabled="false"></R_NumericTextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout xs="4">
+            <R_TextBox @bind-Value="@_viewModel.Data.FirstName"
+                       R_ConductorSource="@conductorRef"
+                       R_EnableAdd
+                       R_EnableEdit></R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+
+
+    <R_StackLayout Row>
+        <R_ItemLayout xs="4">
+            <R_TextBox @bind-Value="@_viewModel.Data.LastName"
+                       R_ConductorSource="@conductorRef"
+                       R_EnableAdd
+                       R_EnableEdit></R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout xs="4">
+            <R_TextArea @bind-Value="@_viewModel.Data.Address"
+                        R_ConductorSource="@conductorRef"
+                        R_EnableAdd
+                        R_EnableEdit></R_TextArea>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout xs="4">
+            <R_TextBox @bind-Value="@_viewModel.Data.City"
+                       R_ConductorSource="@conductorRef"
+                       R_EnableAdd
+                       R_EnableEdit></R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout xs="4">
+            <R_TextBox @bind-Value="@_viewModel.Data.Country"
+                       R_ConductorSource="@conductorRef"
+                       R_EnableAdd
+                       R_EnableEdit></R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+</R_StackLayout>
+
+<R_StackLayout Row>
+    <R_ItemLayout xs="2">
+        <R_AddButton R_Conductor="@conductorRef"></R_AddButton>
+    </R_ItemLayout>
+
+    <R_ItemLayout xs="2">
+        <R_EditButton R_Conductor="@conductorRef"></R_EditButton>
+    </R_ItemLayout>
+
+    <R_ItemLayout xs="2">
+        <R_SaveButton R_Conductor="@conductorRef"></R_SaveButton>
+    </R_ItemLayout>
+
+    <R_ItemLayout xs="2">
+        <R_CancelButton R_Conductor="@conductorRef"></R_CancelButton>
+    </R_ItemLayout>
+
+    <R_ItemLayout xs="2">
+        <R_DeleteButton R_Conductor="@conductorRef"></R_DeleteButton>
+    </R_ItemLayout>
+
+
+
+    @*    <R_ItemLayout xs="2">
+    <R_Find R_Before_Open_Find="R_Before_Open_Find"
+    R_After_Open_Find="R_After_Open_Findasync"
+    R_ConductorSource="@conductorRef"
+    R_EnableOther>
+    @_ILocalizer["_FindEmployee"]
+    </R_Find>
+    </R_ItemLayout>*@
+</R_StackLayout>
+
+<R_Conductor @ref="@conductorRef"
+             R_IsHeader
+             R_ViewModel="@_viewModel"
+             R_ServiceGetRecord="R_ServiceGetRecordAsync"
+             R_Validation="R_Validation"
+             R_ServiceSave="R_ServiceSaveAsync"
+             R_AfterSave="R_AfterSaveAsync"
+             R_AfterAdd="R_AfterAdd"
+             R_ServiceDelete="R_ServiceDeleteAsync">
+</R_Conductor>
+@code {
+
+}
